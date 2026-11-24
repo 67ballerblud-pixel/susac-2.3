@@ -1,0 +1,128 @@
+# SusAC config. Raise numbers to reduce false flags, lower them to be stricter.
+alerts:
+  enabled: true        # false = nobody gets chat alerts (flags are still saved)
+  console-log: true    # false = stop flags printing in the console
+alert-cooldown-seconds: 3
+teleport-grace-ms: 2000
+
+checks:
+  speed:
+    enabled: true
+    max-per-tick: 0.65   # blocks per tick (sprint-jump is ~0.36)
+    buffer: 6
+  fly:
+    enabled: true
+    hover-ticks: 10      # ticks hovering in mid-air
+  omnisprint:
+    enabled: true
+    ticks: 10
+  reach:
+    enabled: true
+    max: 3.9             # vanilla is 3.0, extra is for lag
+    buffer: 3
+  autoclicker:
+    enabled: true
+    max-cps: 22
+  wallhit:
+    enabled: true
+    buffer: 5
+  multiaura:
+    enabled: true
+  nuker:
+    enabled: true
+    max-per-second: 12
+  breakreach:
+    enabled: true
+    max: 6.5
+  fastplace:
+    enabled: true
+    max-per-second: 16
+  fasteat:
+    enabled: true
+    min-interval-ms: 600
+
+  # ---- SusAC+ behavioural checks for Anubis-style movement/combat modules ----
+  jesus:
+    enabled: true
+    ticks: 8              # consecutive liquid-surface movement samples
+  nofall:
+    enabled: true
+    min-drop: 5.0         # ignore short drops and ordinary step-downs
+    buffer: 2
+  elytrafly:
+    enabled: true
+    max-per-tick: 3.2    # horizontal blocks/tick while gliding; tune for server/network
+    buffer: 5
+  scaffold:
+    enabled: true
+    buffer: 6
+    radius: 2.6
+    max-abs-pitch: 48    # looking less steeply down while placing beneath/near feet
+  killaura:
+    enabled: true
+    max-angle: 105       # generous view cone; repeated attacks behind view only
+    buffer: 3
+  autototem:
+    enabled: true
+    min-interval-ms: 90
+    buffer: 4
+
+  # ---- new checks ----
+  xray:
+    enabled: true
+    window: 150          # mined filler/ore blocks looked at (below Y20 or Nether)
+    rare-ores: 8         # diamond/ancient debris in that window = flag
+  macroclick:
+    enabled: true
+    max-deviation-ms: 8  # click timing that is TOO consistent
+  autowalk:
+    enabled: true
+    seconds: 90          # walking this long with a frozen camera
+  walltrack:
+    enabled: true
+    range: 40
+    samples: 12          # 12 samples = ~3 seconds of tracking
+  altlimit:
+    enabled: true
+    max-accounts: 2      # on the same IP (turn off if behind a proxy)
+  chatflood:
+    enabled: true
+    max-messages: 5
+    window-ms: 5000
+  chatspam:
+    enabled: true
+    repeats: 3
+  chatcaps:
+    enabled: true
+    min-letters: 10
+    ratio: 0.7
+  advertising:
+    enabled: true
+  doxing:
+    enabled: true
+  deaththreat:
+    enabled: true
+  hatespeech:
+    enabled: true
+  profanity:
+    enabled: true
+
+chat:
+  # Print chat to the console when another plugin (UltimateDonutSmp) cancels it and sends it itself.
+  # Muted/filtered messages are cancelled too, so they also show up here.
+  console-log: true
+  # Domains/IPs that are allowed in chat (your own server address, etc.)
+  advertising-whitelist: []
+  # Phrases are matched as whole words after leet-speak cleanup (1->i, 3->e, 0->o...)
+  threat-phrases:
+    - "kill yourself"
+    - "kys"
+    - "i will find you"
+    - "i will kill you"
+    - "hope you die"
+  # Add your own words here, one per line
+  hate-words: []
+  profanity-words:
+    - "fuck"
+    - "shit"
+    - "bitch"
